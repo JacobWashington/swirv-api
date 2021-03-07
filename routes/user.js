@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const ctrl = require('../controllers');
 const passport = require('passport');
+const uploads = multer({ dest: './uploads'});
 
 // routes
 router.get('/test', ctrl.user.test);

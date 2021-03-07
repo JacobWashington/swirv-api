@@ -7,7 +7,7 @@ const { JWT_SECRET } = process.env;
 // img
 const multer = require('multer');
 const cloudinary = require('cloudinary');
-const uploads = multer({ dest: './uploads'});
+
 
 // Database
 const db = require("../models");
