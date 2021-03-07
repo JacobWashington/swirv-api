@@ -1,6 +1,9 @@
 const router = require('express').Router();
 const ctrl = require('../controllers');
 const passport = require('passport');
+
+// img
+const multer = require('multer');
 const uploads = multer({ dest: './uploads'});
 
 // routes

@@ -5,7 +5,6 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET } = process.env;
 // img
-const multer = require('multer');
 const cloudinary = require('cloudinary');
 
 
