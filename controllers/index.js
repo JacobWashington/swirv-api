@@ -1,3 +1,4 @@
 module.exports = {
-// import controllers
+Comment: require('./comment'),
+Eipsode: require('./episode'),
   }

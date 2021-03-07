@@ -3,11 +3,11 @@ const { Schema } = mongoose;
 
 const commentSchema = new Schema({
     authId: {
-        type: Integer,
+        type: Number,
         require: true,
     },
     postId: {
-        type: Integer,
+        type: Number,
         require: true,
     },
     content: {
@@ -16,11 +16,11 @@ const commentSchema = new Schema({
         max: [1500, 'Comments must contain between 1 and 1500 characters']
     },
     votesUp: {
-        type: Integer,
+        type: Number,
         default: 0
     },
     votesDown: {
-        type: Integer,
+        type: Number,
         default: 0
     },
     created: {

@@ -1,3 +1,4 @@
 module.exports = {
-// import routes
+Comment: require('./comment'),
+Episode: require('./episode'),
   };

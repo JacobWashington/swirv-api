@@ -3,14 +3,14 @@ const { Schema } = mongoose;
 
 const episodeSchema = new Schema({
 authId: {
-    type: Integer,
+    type: Number,
     require: true,
 },
 storyLineId: {
-    type: Integer,
+    type: Number,
     require: true
 },
-branchId: Integer,
+branchId: Number,
 title: {
     type: String,
     require: true,
