@@ -17,6 +17,8 @@ app.use(cors());
 app.use(passport.initialize());
 
 // API Routes
+app.use('/api/users', routes.User);
+
 
 // Server
 const server = app.listen(PORT, () =>

@@ -4,13 +4,12 @@ const passport = require("passport");
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET } = process.env;
+
 // img
 const cloudinary = require('cloudinary');
 
-
 // Database
 const db = require("../models");
-
 
 // Controller
 const test = (req, res) => {
@@ -134,5 +133,5 @@ module.exports = {
     test,
     register,
     login,
-    profile,
+    profile
 }

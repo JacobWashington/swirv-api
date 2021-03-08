@@ -7,10 +7,10 @@ const multer = require('multer');
 const uploads = multer({ dest: './uploads'});
 
 // routes
-router.get('/test', ctrl.user.test);
-router.post('/register', uploads.single('inputFile'), ctrl.user.register);
-router.post('/login', ctrl.user.login);
-router.get('/profile', passport.authenticate('jwt', { session: false }), ctrl.user.profile);
+router.get('/test', ctrl.User.test);
+router.post('/register', uploads.single('inputFile'), ctrl.User.register);
+router.post('/login', ctrl.User.login);
+router.get('/profile', passport.authenticate('jwt', { session: false }), ctrl.User.profile);
 
 // exports
 module.exports = router;
