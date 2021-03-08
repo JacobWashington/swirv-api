@@ -101,13 +101,15 @@ const login = async (req, res) => {
 
 // Profile
 const profile = (req, res) => {
-    console.log(">>>>> inside /profile");
-    console.log(req.body);
-    console.log(">>>>> user");
-    console.log(req.user);
-    const { id, name, email } = req.user;
-    res.json({ id:id, name, email });
-}
+
+  console.log(">>>>> inside /profile");
+  console.log(req.body);
+  console.log(">>>>> user");
+  console.log(req.user);
+  const { id, name, email } = req.user;
+  res.json({ id: id, name, email });
+};
+
 
 
 // Upload profile pic
