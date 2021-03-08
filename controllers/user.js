@@ -62,7 +62,7 @@ const login = async (req, res) => {
   console.log(req.body);
 
   const foundUser = await db.User.findOne({ email: req.body.email });
-
+  
   if (foundUser) {
     // user is in the DB
     let isMatch = await bcrypt.compare(req.body.password, foundUser.password);
@@ -101,6 +101,7 @@ const login = async (req, res) => {
 
 // Profile
 const profile = (req, res) => {
+
   console.log(">>>>> inside /profile");
   console.log(req.body);
   console.log(">>>>> user");
@@ -108,6 +109,8 @@ const profile = (req, res) => {
   const { id, name, email } = req.user;
   res.json({ id: id, name, email });
 };
+
+
 
 // Upload profile pic
 const updateUser = async (req, res) => {
