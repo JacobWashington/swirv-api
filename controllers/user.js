@@ -18,9 +18,9 @@ const test = (req, res) => {
 
 // POST for adding the new user to the database
 const register = (req, res) => {
-  console.log(">>>>> Inside of /register");
-  console.log(">>>>> req.body");
-  console.log(req.body);
+    console.log(">>>>> Inside of /register");
+    console.log(">>>>> req.body");
+    console.log(req.body);
 
   db.User.findOne({ email: req.body.email })
     .then((user) => {
