@@ -14,10 +14,11 @@ mongoose
   .then(() => console.log("MongoDB successfully connected..."))
   .catch((err) => console.log("MongoDB connection error:", err));
 
-module.exports = {
 
+module.exports = {
   User: require('./user'),
+  Profile: require('./profile'),
+  Storyline: require('./storyline'),
   Episode: require('./episode'),
   Comment: require('./comment')
-
 };
