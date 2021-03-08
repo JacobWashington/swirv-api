@@ -1,3 +1,5 @@
 module.exports = {
-// import routes
+  // import routes
+  Profile: require('./profile'),
+  Storyline: require('./storyline')
   };

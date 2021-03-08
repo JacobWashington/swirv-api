@@ -17,6 +17,7 @@ app.use(cors());
 app.use(passport.initialize());
 
 // API Routes
+app.use('/swirv/profile', routes.profile)
 
 // Server
 const server = app.listen(PORT, () =>

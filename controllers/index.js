@@ -1,3 +1,3 @@
 module.exports = {
-// import controllers
-  }
+  Profile: require('./profile')
+}
