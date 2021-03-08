@@ -2,21 +2,15 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const storylineSchema = new Schema({
-    id: {
-        type: Number,
-        required: true
-    },
     authId: {
         type: Number,
         required: true
     },
     episodes: {
         type: Array,
-        required: true
     },
     genre: {
-        type: String,
-        required: false        
+        type: String,   
     },
     branches: {
         type: Array,
