@@ -1,3 +1,5 @@
+
 module.exports = {
-  Profile: require('./profile')
+  Profile: require('./profile'),
+  Storyline: require('./storyline'),
 }

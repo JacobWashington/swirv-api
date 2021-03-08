@@ -18,6 +18,7 @@ app.use(passport.initialize());
 
 // API Routes
 app.use('/swirv/profile', routes.profile)
+app.use('/swirv/episode', routes.Storyline)
 
 // Server
 const server = app.listen(PORT, () =>
