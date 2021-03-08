@@ -17,8 +17,14 @@ app.use(cors());
 app.use(passport.initialize());
 
 // API Routes
-app.use('/swirv/profile', routes.profile)
-app.use('/swirv/episode', routes.Storyline)
+app.get('/swirv/', (req, res) => {
+  res.json({message: "Welcome to Swirv"});
+});
+app.use('/swirv/users', routes.User);
+app.use('/swirv/comments', routes.Comment);
+app.use('/swirv/episodes', routes.Episode);
+app.use('/swirv/profile', routes.Profile);
+app.use('/swirv/episode', routes.Storyline);
 
 // Server
 const server = app.listen(PORT, () =>
