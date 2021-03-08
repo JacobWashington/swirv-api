@@ -24,7 +24,8 @@ app.use('/swirv/users', routes.User);
 app.use('/swirv/comments', routes.Comment);
 app.use('/swirv/episodes', routes.Episode);
 app.use('/swirv/profile', routes.Profile);
-app.use('/swirv/storylines', routes.Storyline);
+app.use('/swirv/storyline', routes.Storyline);
+
 
 // Server
 const server = app.listen(PORT, () =>
