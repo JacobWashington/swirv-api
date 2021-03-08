@@ -20,8 +20,9 @@ const create = (req, res) => {
     console.log('=====> Inside POST /storyline');
     console.log('=====> req.body');
     console.log(req.body); // object used for creating new storyline
-    const userId = req.user.id
-    db.Storyline.create({authId: userId}, (err, savedStoryline) => {
+    // const userId = req.body
+    console.log(">>>>>USER<<<<<<", req.user)
+    db.Storyline.create({authId: req.user._id}, (err, savedStoryline) => {
         if (err) console.log('Error in storyline#create:', err);
         res.json(savedStoryline);
     });

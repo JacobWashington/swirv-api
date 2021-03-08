@@ -9,8 +9,7 @@ const profileSchema = new Schema({
     bio: {
         type: String,
         required: true
-    },
-
+    }
 })
 
 const Profile = mongoose.model('Profile', profileSchema)

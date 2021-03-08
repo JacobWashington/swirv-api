@@ -21,10 +21,10 @@ app.get('/swirv/', (req, res) => {
   res.json({message: "Welcome to Swirv"});
 });
 app.use('/swirv/users', routes.User);
-app.use('/swirv/comments', routes.Comment);
-app.use('/swirv/episodes', routes.Episode);
-app.use('/swirv/profile', routes.Profile);
-app.use('/swirv/storyline', routes.Storyline);
+app.use('/swirv/comments', passport.authenticate('jwt', { session: false }), routes.Comment);
+app.use('/swirv/episodes', passport.authenticate('jwt', { session: false }), routes.Episode);
+app.use('/swirv/profile', passport.authenticate('jwt', { session: false }), routes.Profile);
+app.use('/swirv/storyline', passport.authenticate('jwt', { session: false }), routes.Storyline);
 
 // Server
 const server = app.listen(PORT, () =>
