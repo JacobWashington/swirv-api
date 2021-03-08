@@ -1,10 +1,10 @@
 const router = require("express").Router();
 const ctrl = require("../controllers");
 
-router.post("/", ctrl.Eipsode.create);
-router.get("/index", ctrl.Eipsode.index);
-router.get("/:id", ctrl.Eipsode.show);
-router.post("/:id", ctrl.Eipsode.update);
-router.post("/:id", ctrl.Eipsode.destroy)
+router.post("/", ctrl.Episode.create);
+router.get("/index", ctrl.Episode.index);
+router.get("/:id", ctrl.Episode.show);
+router.post("/:id", ctrl.Episode.update);
+router.post("/:id", ctrl.Episode.destroy)
 
 module.exports = router;

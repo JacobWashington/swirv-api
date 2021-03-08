@@ -109,19 +109,15 @@ const profile = (req, res) => {
 }
 
 // Upload profile pic
-const uploadPic = async (req, res) => {
+const updateUser = async (req, res) => {
     try {
         const image = await req.file.path;
         const name = await req.body.name;
         const userId = await req.user.id;
-        cloudinary.uploader.upload(image, (result) => {
-            db.category.create({
-                name: name,
-                userId: userId,
-                img: result.url
-            })
-            res.redirect('/category/');
-        });
+        const filter = { userId: userId };
+        const uploading = cloudinary.uploader.upload(image);
+        let updating = await db.User.findOneAndUpdate(filter, { name: name, avatar: uploading.url });
+        res.redirect('/swirv/profile');
     }catch(e) {
         console.log(e.message);
     }
@@ -133,5 +129,6 @@ module.exports = {
     test,
     register,
     login,
-    profile
+    profile,
+    updateUser
 }
