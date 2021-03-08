@@ -3,8 +3,8 @@ const { Schema } = mongoose;
 
 const storylineSchema = new Schema({
     authId: {
-        type: Number,
-        required: true
+        type: String,
+        required: false
     },
     episodes: {
         type: Array,
