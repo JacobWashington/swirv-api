@@ -26,7 +26,6 @@ app.use('/swirv/episodes', routes.Episode);
 app.use('/swirv/profile', routes.Profile);
 app.use('/swirv/storyline', routes.Storyline);
 
-
 // Server
 const server = app.listen(PORT, () =>
   console.log(`Server is running on PORT: ${PORT}`)
