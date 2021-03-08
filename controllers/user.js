@@ -100,7 +100,7 @@ const profile = (req, res) => {
     console.log(req.body);
     console.log(">>>>> user");
     console.log(req.user);
-    const { id, name, email } = req;
+    const { id, name, email } = req.user;
     res.json({ id:id, name, email });
 }
 
