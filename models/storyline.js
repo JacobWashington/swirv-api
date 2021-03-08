@@ -8,10 +8,9 @@ const storylineSchema = new Schema({
     },
     episodes: {
         type: Array,
-        required: true
     },
     genre: {
-        type: String,  
+        type: String,   
     },
     branches: {
         type: Array,
