@@ -1,4 +1,7 @@
 module.exports = {
-Comment: require('./comment'),
-Episode: require('./episode'),
+  
+  User: require('./user'),
+  Episode: require('./episode'),
+  Comment: require('./comment'),
+
   };

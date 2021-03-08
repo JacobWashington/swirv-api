@@ -20,9 +20,10 @@ app.use(passport.initialize());
 app.get('/swirv/', (req, res) => {
   res.json({message: "Welcome to Swirv"});
 });
-
+app.use('/api/users', routes.User);
 app.use('/swirv/comments', routes.Comment);
 app.use('/swirv/episodes', routes.Episode);
+
 
 // Server
 const server = app.listen(PORT, () =>
