@@ -30,15 +30,11 @@ const register = (req, res) => {
             return res.status(400).json({ message: "Email already exists ⛔️"})
         } else {
             // Create new user if no existing user
-            const image = req.file.path;
-            cloudinary.uploader.upload(image, (result) => {
-                const newUser = new db.User({
-                    name: req.body.name,
-                    email: req.body.email,
-                    password: req.body.password,
-                    avatar: result.url
-                });
-            })
+            const newUser = new db.User({
+                name: req.body.name,
+                email: req.body.email,
+                password: req.body.password,
+            });
 
             // Salt and hash the password - before saving the user
             bcrypt.genSalt(10, (err, salt) => {
