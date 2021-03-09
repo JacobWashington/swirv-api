@@ -2,6 +2,9 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const storylineSchema = new Schema({
+    title: {
+        type: String,
+    },
     authId: {
         type: String,
         required: false
