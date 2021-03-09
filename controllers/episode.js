@@ -27,11 +27,14 @@ const create = (req, res) => {
     console.log('=====> Inside POST /episode');
     console.log('=====> req.body');
     console.log(req.body); // object used for creating new episode
-
+    // find the storyline that matches the storylineId to append with spread
     db.Episode.create(req.body, (err, savedEpisode) => {
+        // Find and update method for storyline, 
+        // Append new episode to episode's array in storyline
         if (err) console.log('Error in episode#create:', err);
         res.json(savedEpisode);
     });
+    
 };
 
 const update = (req, res) => {
