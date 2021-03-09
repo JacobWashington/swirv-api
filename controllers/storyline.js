@@ -4,6 +4,13 @@ const db = require('../models');
 const index = (req, res) => {
     res.json({ message: 'Storyline endpoint OK! ✅'});
 }
+
+const findAll = async (req, res) => {
+    console.log(req.user._id); // object used for finding storyline by userId
+    const userStories = await db.Storyline.find({authId: req.user._id})
+    res.json(userStories)
+};
+
 const show = (req, res) => {
     // Purpose: Fetch one storyline from DB and return
     console.log('=====> Inside GET /storyline/:id');
@@ -15,6 +22,7 @@ const show = (req, res) => {
     });
 };
 
+
 const create = (req, res) => {
     // Purpose: Create one storyline by adding body to DB, and return
     console.log('=====> Inside POST /storyline');
@@ -22,7 +30,7 @@ const create = (req, res) => {
     console.log(req.body); // object used for creating new storyline
     // const userId = req.body
     console.log(">>>>>USER<<<<<<", req.user)
-    db.Storyline.create({authId: req.user._id}, (err, savedStoryline) => {
+    db.Storyline.create(req.body, (err, savedStoryline) => {
         if (err) console.log('Error in storyline#create:', err);
         res.json(savedStoryline);
     });
@@ -58,4 +66,5 @@ module.exports = {
     create,
     update,
     destroy,
+    findAll
 };

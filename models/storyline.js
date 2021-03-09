@@ -8,7 +8,11 @@ const storylineSchema = new Schema({
     },
     authId: {
         type: String,
-        required: false
+        require: true
+    },
+    title: {
+        type: String,
+        require: false
     },
     episodes: {
         type: Array,
@@ -18,11 +22,11 @@ const storylineSchema = new Schema({
     },
     branches: {
         type: Array,
-        required: false
+        require: false
     },
     comments: {
         type: Array,
-        required: false
+        require: false
     },
     isOffering: {
         type: Boolean,
