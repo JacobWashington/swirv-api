@@ -22,15 +22,23 @@ const show = (req, res) => {
     });
 };
 
-const create = (req, res) => {
+const create = async (req, res) => {
     // Purpose: Create one comment by adding body to DB, and return
     console.log('=====> Inside POST /comment');
     console.log('=====> req.body');
     console.log(req.body); // object used for creating new comment
-
-    db.Comment.create(req.body, (err, savedComment) => {
-        if (err) console.log('Error in comment#create:', err);
-        res.json(savedComment);
+    db.Comment.create(req.body, async (err, savedComment) => {
+        if(req.body.episodeId) {
+            const foundEpisode = await db.Episode.findOne({_id: req.body.episodeId})
+            foundEpisode.comments.push(savedComment._id)
+            foundEpisode.save()
+            res.json(foundEpisode)
+        } else if (req.body.storyLineId) {
+            const foundStoryline = await db.Storyline.findOne({_id: req.body.storyLineId})
+            foundStoryline.comments.push(savedComment._id)
+            foundStoryline.save()
+            res.json(foundStoryline)
+        }
     });
 };
 
