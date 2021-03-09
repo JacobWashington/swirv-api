@@ -30,7 +30,7 @@ const create = (req, res) => {
     console.log(req.body); // object used for creating new storyline
     // const userId = req.body
     console.log(">>>>>USER<<<<<<", req.user)
-    db.Storyline.create({authId: req.user._id, title: req.body.title}, (err, savedStoryline) => {
+    db.Storyline.create(req.body, (err, savedStoryline) => {
         if (err) console.log('Error in storyline#create:', err);
         res.json(savedStoryline);
     });
