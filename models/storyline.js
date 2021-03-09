@@ -3,16 +3,12 @@ const { Schema } = mongoose;
 
 const storylineSchema = new Schema({
     title: {
-        tpye: String,
-        required: true
+        type: String,
+        require: true
     },
     authId: {
         type: String,
         require: true
-    },
-    title: {
-        type: String,
-        require: false
     },
     episodes: {
         type: Array,

@@ -6,9 +6,11 @@ const commentSchema = new Schema({
         type: String,
         require: true,
     },
-    postId: {
+    episodeId: {
         type: String,
-        require: true,
+    },
+    storylineId: {
+        type: String,
     },
     content: {
         type: String,
