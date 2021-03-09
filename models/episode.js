@@ -10,7 +10,6 @@ storyLineId: {
     type: String,
     require: true
 },
-branchId: String,
 title: {
     type: String,
     require: true,
@@ -23,6 +22,11 @@ content: {
     min: [10, 'Episode must contain between 10 and 23,500 characters'],
     max: [23500, 'Episode must contain between 10 and 23, 500 characters'],
 },
+branchedFrom: String,
+branches: {
+    type: Array,
+    require: false,
+  },
 isOffering: {
     type: Boolean,
     default: false,
