@@ -3,11 +3,11 @@ const { Schema } = mongoose;
 
 const commentSchema = new Schema({
     authId: {
-        type: Number,
+        type: String,
         require: true,
     },
     postId: {
-        type: Number,
+        type: String,
         require: true,
     },
     content: {
