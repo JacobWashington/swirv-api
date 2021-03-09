@@ -22,24 +22,24 @@ const show = (req, res) => {
     });
 };
 
-const create = (req, res) => {
+const create = async (req, res) => {
     // Purpose: Create one episode by adding body to DB, and return
     console.log('=====> Inside POST /episode');
     console.log('=====> req.body');
     console.log(req.body); // object used for creating new episode
     // find the storyline that matches the storylineId to append with spread
-    db.Episode.create(req.body, (err, savedEpisode) => {
+    db.Episode.create(req.body, async (err, savedEpisode) => {
         // Find and update method for storyline, 
         // Append new episode's episodeId to episode's array in storyline
-        db.Storyline.findByIdAndUpdate(
-            { _id: req.body.storyLineId },
-            { $push: { episodes: {title: savedEpisode.title, episodeId: savedEpisode._id } } }
-         )
-        if (err) console.log('Error in episode#create:', err);
+        const foundStory = await db.Storyline.findOne({_id:req.body.storyLineId})
+        foundStory.episodes.push(savedEpisode._id)
+        foundStory.save();
+        console.log("FOUNDSTORY", foundStory)
+        if (err) console.log('Error in episode#create:', err)
         res.json(savedEpisode);
-    });
-    
-};
+    })
+}
+
 
 const update = (req, res) => {
     // Purpose: Update one episode in the DB, and return
