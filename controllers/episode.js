@@ -30,7 +30,11 @@ const create = (req, res) => {
     // find the storyline that matches the storylineId to append with spread
     db.Episode.create(req.body, (err, savedEpisode) => {
         // Find and update method for storyline, 
-        // Append new episode to episode's array in storyline
+        // Append new episode's episodeId to episode's array in storyline
+        db.Storyline.findByIdAndUpdate(
+            { _id: req.body.storyLineId },
+            { $push: { episodes: {title: savedEpisode.title, episodeId: savedEpisode._id } } }
+         )
         if (err) console.log('Error in episode#create:', err);
         res.json(savedEpisode);
     });
