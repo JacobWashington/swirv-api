@@ -80,5 +80,4 @@ module.exports = {
   create,
   update,
   destroy,
-  handleBranch,
 };
