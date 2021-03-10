@@ -50,12 +50,17 @@ const consumeStoryline = async (req, res) => {
 
 const show = async (req, res) => {
   const all = await db.Storyline.find({authId: "the_great_attractor"})
-  const allEp = await db.Episode.find({authId: "the_great_attractor"})
   res.json(all)
+};
+
+const findEpisodes = async (req, res) => {
+  const allEp = await db.Episode.find({storyLineId: req.params.id})
+  res.json(allEp)
 };
 
 
 module.exports = {
   consumeStoryline,
   show,
+  findEpisodes
 };
