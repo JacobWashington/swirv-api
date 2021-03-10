@@ -18,32 +18,33 @@ const consumeStoryline = async (req, res) => {
     // Get the syntax for searching for storylines that contains episodeId in storyline.episodes array
     const theId = mongoose.Types.ObjectId(getEpisodeId);
     
-    const selectedStoryline = await db.Storyline.find({
-      episodes: theId
-    });
     // change selected storyline's authId to TGA
     await db.Storyline.updateOne({episodes: theId}, update);
     
     // pushing to TGA's storyline array
     const TGA = await db.TheGreatAttractor.findOne({});
+    const selectedStoryline = await db.Storyline.find({
+      episodes: theId
+    });
     TGA.storylines.push(selectedStoryline[0]._id);
     await TGA.save();
 
   } else if (req.body.storylineId) {
 
     const update = { authId: "the_great_attractor" };
-    const selectedStoryline = await db.Storyline.find({
-      _id: req.body.storylineId
-    });
-
+    
     // Changing all the authId in the episodes related to selected storylineId with TGA
     // replacing for loop
     const test = await db.Episode.updateMany({storyLineId: req.body.storylineId}, update, {unique: true});
-
+    
     // pushing to TGA's storyline array
     const TGA = await db.TheGreatAttractor.findOne({});
+    const selectedStoryline = await db.Storyline.find({
+      _id: req.body.storylineId
+    });
     TGA.storylines.push(selectedStoryline[0]._id);
     await TGA.save();
+    res.json(TGA);
   }
 };
 
