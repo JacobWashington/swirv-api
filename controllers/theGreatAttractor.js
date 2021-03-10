@@ -8,13 +8,17 @@ const consumeStoryline = async (req, res) => {
   if (req.body.episodeId) {
     const filter = { episodeId: req.body.episodeId };
     const update = { authId: "the_great_attractor" };
-    let doc = await db.Storyline.findOneAndUpdate(filter, update, {
+    let theConsumed = await db.Storyline.findOneAndUpdate(filter, update, {
       new: true,
     });
+    const TGA = await db.TheGreatAttractor.findOne({});
+    console.log(">>>>>>TGA", TGA)
+    TGA.storylines.push(theConsumed.storylineId);
+    TGA.save();
   } else if (req.body.storylineId) {
     const filter = { storylineId: req.body.storylineId };
     const update = { authId: "the_great_attractor" };
-    let doc = await db.Storyline.findOneAndUpdate(
+    let theConsumed = await db.Storyline.findOneAndUpdate(
       filter,
       update,
       {
@@ -30,5 +34,13 @@ const consumeStoryline = async (req, res) => {
         }
       }
     );
+    const TGA = await db.TheGreatAttractor.findOne({});
+    console.log(">>>>>>TGA", TGA)
+    TGA.storylines.push(req.body.storylineId);
+    TGA.save();
   }
+};
+
+module.exports = {
+  consumeStoryline
 };

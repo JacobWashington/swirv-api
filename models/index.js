@@ -20,5 +20,6 @@ module.exports = {
   Profile: require('./profile'),
   Storyline: require('./storyline'),
   Episode: require('./episode'),
-  Comment: require('./comment')
+  Comment: require('./comment'),
+  TheGreatAttractor: require('./theGreatAttractor')
 };

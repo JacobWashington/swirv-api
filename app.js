@@ -25,6 +25,7 @@ app.use('/swirv/comments', passport.authenticate('jwt', { session: false }), rou
 app.use('/swirv/episodes', passport.authenticate('jwt', { session: false }), routes.Episode);
 app.use('/swirv/profiles', passport.authenticate('jwt', { session: false }), routes.Profile);
 app.use('/swirv/storylines', passport.authenticate('jwt', { session: false }), routes.Storyline);
+app.use('/swirv/theGreatAttractor', passport.authenticate('jwt', { session: false }), routes.TheGreatAttractor);
 
 // Server
 const server = app.listen(PORT, () =>
