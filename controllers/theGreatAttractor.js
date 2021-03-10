@@ -51,7 +51,7 @@ const consumeStoryline = async (req, res) => {
 const show = async (req, res) => {
   const all = await db.Storyline.find({authId: "the_great_attractor"})
   const allEp = await db.Episode.find({authId: "the_great_attractor"})
-  res.json(allEp)
+  res.json(all)
 };
 
 
