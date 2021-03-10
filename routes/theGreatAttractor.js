@@ -4,6 +4,7 @@ const ctrl = require('../controllers');
 
 // routes
 router.post("/", ctrl.TheGreatAttractor.consumeStoryline)
+router.get("/", ctrl.TheGreatAttractor.show)
 
 // exports
 module.exports = router;
