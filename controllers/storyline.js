@@ -38,8 +38,6 @@ const create = (req, res) => {
 
 const createBranch = (req, res) => {
   if (req.body.storylineId && req.body.episodeId) {
-    // if user one1 branches from user2's storyline,
-    // create a new storyline with unique id for user1 where user1's branchStorylineId == user2's storylineId
     console.log(">>>>USER", req.user)
     console.log(">>>>BODY", req.body)
     
@@ -48,20 +46,17 @@ const createBranch = (req, res) => {
     db.Storyline.create({
         branchedFromStorylineId: storylineId,
         branchedFromEpisodeId: episodeId,
-        authId: req.user._id, // *
+        authId: req.user._id, 
         title: title
     }, (err, savedBranch) => {
         if (err) console.log("Error in storyline#create:", err);
         res.json(savedBranch);
       });
-    // user1's episodeBranchId == user2's episodeId
-    // append user1's new storylineId to user2's storyline.branches array
   } else if (req.body.storylineId){
     const { storylineId, title } = req.body
-      // req only contains req.body.storylineId
       db.Storyline.create({
         branchedFromStorylineId: storylineId,
-        authId: req.user._id, // *
+        authId: req.user._id, 
         title: title
     }, (err, savedBranch) => {
         if (err) console.log("Error in storyline#create:", err);
