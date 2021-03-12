@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const db = require("../models");
 
 const index = (req, res) => {
@@ -8,6 +9,12 @@ const index = (req, res) => {
     if (err) console.log("Error in episode#index:", err);
     res.json(foundEpisodes);
   });
+};
+
+const findUser = async (req, res) => {
+  const userEps = await db.Episode.find({ authId: req.body.authId });
+  console.log("REQ.BODY>>>>>>>",req.body)
+  res.json(userEps);
 };
 
 const show = (req, res) => {
@@ -29,10 +36,12 @@ const create = async (req, res) => {
   console.log(req.body); // object used for creating new episode
   // find the storyline that matches the storylineId to append with spread
   db.Episode.create(req.body, async (err, savedEpisode) => {
+    // const id = req.body.storylineId
+    // const theId = mongoose.Types.ObjectId(id);
     // Find and update method for storyline,
     // Append new episode's episodeId to episode's array in storyline
     const foundStory = await db.Storyline.findOne({
-      _id: req.body.storyLineId,
+      _id: req.body.storylineId,
     });
     foundStory.episodes.push(savedEpisode._id);
     foundStory.save();
@@ -61,13 +70,26 @@ const update = (req, res) => {
   );
 };
 
-const destroy = (req, res) => {
-  // Purpose: Update one episode in the DB, and return
+
+const destroy = async (req, res) => {
+
+  const episodeId = req.body.episodeId
+  const theId = mongoose.Types.ObjectId(episodeId);
+  const idd = String(theId)
+
   console.log("=====> Inside DELETE /episode/:id");
   console.log("=====> req.params");
   console.log(req.params); // object used for finding episode by id
+  console.log("The ID >>> ", theId)
 
-  db.Episode.findByIdAndDelete(req.params.id, (err, deletedEpisode) => {
+  const foundaStory = await db.Storyline.findOne({
+    episodes: theId
+  });
+  console.log("FOUND STORY >>>", foundaStory)
+  foundaStory.episodes.pull(theId);
+  foundaStory.save();
+
+  await db.Episode.findByIdAndDelete(req.params.id, (err, deletedEpisode) => {
     if (err) console.log("Error in episode#destroy:", err);
     res.sendStatus(200);
     console.log(deletedEpisode);
@@ -80,4 +102,5 @@ module.exports = {
   create,
   update,
   destroy,
+  findUser
 };

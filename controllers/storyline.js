@@ -42,6 +42,7 @@ const show = (req, res) => {
 
 
 const createBranch = (req, res) => {
+  console.log("<<< IN createBranch >>>")
   if (req.body.storylineId && req.body.episodeId) {
     console.log(">>>>USER", req.user)
     console.log(">>>>BODY", req.body)
@@ -58,10 +59,11 @@ const createBranch = (req, res) => {
         res.json(savedBranch);
       });
   } else if (req.body.storylineId){
-    const { storylineId, title } = req.body
+    const { storylineId, title, __id } = req.body
+    console.log("CHECKING >>>", req.body)
       db.Storyline.create({
         branchedFromStorylineId: storylineId,
-        authId: req.user._id, 
+        authId: __id, 
         title: title
     }, (err, savedBranch) => {
         if (err) console.log("Error in storyline#create:", err);
