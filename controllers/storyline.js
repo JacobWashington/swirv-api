@@ -5,10 +5,27 @@ const index = (req, res) => {
   res.json({ message: "Storyline endpoint OK! ✅" });
 };
 
-const findAll = async (req, res) => {
-  console.log(req.user._id); // object used for finding storyline by userId
-  const userStories = await db.Storyline.find({ authId: req.user._id });
+const notLoggedInFind = async (req, res) => {
+  const allStories = await db.Storyline.find().sort({created: -1});
+  res.json(allStories);
+}
+
+const findUser = async (req, res) => {
+  const userStories = await db.Storyline.find({ authId: req.body.authId });
+  console.log("REQ.BODY>>>>>>>",req.body)
   res.json(userStories);
+};
+
+const create = (req, res) => {
+  // Purpose: Create one storyline by adding body to DB, and return
+  console.log("=====> Inside POST /storyline");
+  console.log("=====> req.body");
+  console.log(req.body); // object used for creating new storyline
+  // const userId = req.body
+  db.Storyline.create(req.body, (err, savedStoryline) => {
+    if (err) console.log("Error in storyline#create:", err);
+    res.json(savedStoryline);
+  });
 };
 
 const show = (req, res) => {
@@ -23,18 +40,6 @@ const show = (req, res) => {
 };
 
 
-const create = (req, res) => {
-  // Purpose: Create one storyline by adding body to DB, and return
-  console.log("=====> Inside POST /storyline");
-  console.log("=====> req.body");
-  console.log(req.body); // object used for creating new storyline
-  // const userId = req.body
-  console.log(">>>>>USER<<<<<<", req.user);
-  db.Storyline.create(req.body, (err, savedStoryline) => {
-    if (err) console.log("Error in storyline#create:", err);
-    res.json(savedStoryline);
-  });
-};
 
 const createBranch = (req, res) => {
   if (req.body.storylineId && req.body.episodeId) {
@@ -103,6 +108,7 @@ module.exports = {
   create,
   update,
   destroy,
-  findAll,
-  createBranch
+  createBranch,
+  notLoggedInFind,
+  findUser
 };
