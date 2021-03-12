@@ -11,6 +11,7 @@ const { json } = require("express");
 
 const consumeStoryline = async (req, res) => {
 
+  console.log(req.body.storylineId)
   if (req.body.episodeId) {
     
     const update = { authId: "the_great_attractor" };
@@ -28,14 +29,14 @@ const consumeStoryline = async (req, res) => {
     });
     TGA.storylines.push(selectedStoryline[0]._id);
     await TGA.save();
-
   } else if (req.body.storylineId) {
 
     const update = { authId: "the_great_attractor" };
     
     // Changing all the authId in the episodes related to selected storylineId with TGA
     // replacing for loop
-    const test = await db.Episode.updateMany({storyLineId: req.body.storylineId}, update, {unique: true});
+    const updateEps = await db.Episode.updateMany({storyLineId: req.body.storylineId}, update, {unique: true});
+    const updateStoryline = await db.Storyline.updateOne({_id: req.body.storylineId}, update);
     
     // pushing to TGA's storyline array
     const TGA = await db.TheGreatAttractor.findOne({});
