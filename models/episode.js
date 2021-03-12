@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-
 const episodeSchema = new Schema({
 authId: {
     type: String,
