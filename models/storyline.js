@@ -30,6 +30,10 @@ const storylineSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  created: {
+    type: Date,
+    default: Date.now(),
+}
 });
 
 const Storyline = mongoose.model("Storyline", storylineSchema);
