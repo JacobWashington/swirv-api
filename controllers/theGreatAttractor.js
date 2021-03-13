@@ -57,9 +57,17 @@ const findEpisodes = async (req, res) => {
   res.json(allEp)
 };
 
+const destroy = async (req, res) => {
+  const allStorylines = await db.Storyline.deleteMany({authId: "the_great_attractor"})
+  const allEpisodes = await db.Episode.deleteMany({authId: "the_great_attractor"})
+
+  res.json("⚫️TGA's Storylines & Episodes deleted!⚫️")
+};
+
 
 module.exports = {
   consumeStoryline,
   show,
-  findEpisodes
+  findEpisodes,
+  destroy
 };
