@@ -6,7 +6,7 @@ const index = (req, res) => {
 };
 
 const notLoggedInFind = async (req, res) => {
-  const allStories = await db.Storyline.find().sort({created: -1});
+  const allStories = await db.Storyline.find().sort({_id: -1});
   res.json(allStories);
 }
 
@@ -22,6 +22,7 @@ const create = (req, res) => {
   console.log("=====> req.body");
   console.log(req.body); // object used for creating new storyline
   // const userId = req.body
+
   db.Storyline.create(req.body, (err, savedStoryline) => {
     if (err) console.log("Error in storyline#create:", err);
     res.json(savedStoryline);
