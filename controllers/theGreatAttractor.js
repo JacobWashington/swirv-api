@@ -23,15 +23,15 @@ const consumeStoryline = async (req, res) => {
     await db.Storyline.updateOne({episodes: theId}, update);
     
     // pushing to TGA's storyline array
-    const TGA = await db.TheGreatAttractor.findOne({});
-    const selectedStoryline = await db.Storyline.find({
-      episodes: theId
-    });
-    TGA.storylines.push(selectedStoryline[0]._id);
-    await TGA.save();
+    // const TGA = await db.TheGreatAttractor.findOne({});
+    // const selectedStoryline = await db.Storyline.find({
+    //   episodes: theId
+    // });
+    // TGA.storylines.push(selectedStoryline[0]._id);
+    // await TGA.save();
   } else if (req.body.storylineId) {
-
-    const update = { authId: "the_great_attractor" };
+    console.log("TGA THIS >>>", req.body)
+    const update = { authId: "the_great_attractor", title: req.body.title  };
     
     // Changing all the authId in the episodes related to selected storylineId with TGA
     // replacing for loop
@@ -39,13 +39,13 @@ const consumeStoryline = async (req, res) => {
     const updateStoryline = await db.Storyline.updateOne({_id: req.body.storylineId}, update);
     
     // pushing to TGA's storyline array
-    const TGA = await db.TheGreatAttractor.findOne({});
-    const selectedStoryline = await db.Storyline.find({
-      _id: req.body.storylineId
-    });
-    TGA.storylines.push(selectedStoryline[0]._id);
-    await TGA.save();
-    res.json(TGA);
+    // const TGA = await db.TheGreatAttractor.findOne({});
+    // const selectedStoryline = await db.Storyline.find({
+    //   _id: req.body.storylineId
+    // });
+    // TGA.storylines.push(selectedStoryline[0]._id);
+    // await TGA.save();
+    // res.json(TGA);
   }
 };
 
