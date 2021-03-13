@@ -6,7 +6,7 @@ authId: {
     type: String,
     require: true,
 },
-storyLineId: {
+storylineId: {
     type: String,
     require: true
 },
