@@ -36,10 +36,7 @@ const create = async (req, res) => {
   console.log(req.body); // object used for creating new episode
   // find the storyline that matches the storylineId to append with spread
   db.Episode.create(req.body, async (err, savedEpisode) => {
-    // const id = req.body.storylineId
-    // const theId = mongoose.Types.ObjectId(id);
-    // Find and update method for storyline,
-    // Append new episode's episodeId to episode's array in storyline
+
     const foundStory = await db.Storyline.findOne({
       _id: req.body.storylineId,
     });

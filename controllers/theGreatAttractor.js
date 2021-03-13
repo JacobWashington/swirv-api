@@ -16,7 +16,7 @@ const consumeStoryline = async (req, res) => {
     
     const update = { authId: "the_great_attractor" };
     const getEpisodeId = req.body.episodeId
-    // Get the syntax for searching for storylines that contains episodeId in storyline.episodes array
+
     const theId = mongoose.Types.ObjectId(getEpisodeId);
     
     // change selected storyline's authId to TGA
@@ -32,10 +32,8 @@ const consumeStoryline = async (req, res) => {
   } else if (req.body.storylineId) {
     console.log("TGA THIS >>>", req.body)
     const update = { authId: "the_great_attractor", title: req.body.title  };
-    
-    // Changing all the authId in the episodes related to selected storylineId with TGA
-    // replacing for loop
-    const updateEps = await db.Episode.updateMany({storyLineId: req.body.storylineId}, update, {unique: true});
+
+    const updateEps = await db.Episode.updateMany({storylineId: req.body.storylineId}, update, {unique: true});
     const updateStoryline = await db.Storyline.updateOne({_id: req.body.storylineId}, update);
     
     // pushing to TGA's storyline array
@@ -59,9 +57,17 @@ const findEpisodes = async (req, res) => {
   res.json(allEp)
 };
 
+const destroy = async (req, res) => {
+  const allStorylines = await db.Storyline.deleteMany({authId: "the_great_attractor"})
+  const allEpisodes = await db.Episode.deleteMany({authId: "the_great_attractor"})
+
+  res.json("⚫️TGA's Storylines & Episodes deleted!⚫️")
+};
+
 
 module.exports = {
   consumeStoryline,
   show,
-  findEpisodes
+  findEpisodes,
+  destroy
 };
