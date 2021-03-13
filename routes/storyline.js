@@ -12,7 +12,7 @@ router.get('/index', ctrl.Storyline.index);
 router.post("/createbranch", ctrl.Storyline.createBranch);
 router.get("/:id", ctrl.Storyline.show);
 router.post("/:id", ctrl.Storyline.update);
-router.post("/:id", ctrl.Storyline.destroy);
+router.post("/del/:id", ctrl.Storyline.destroy);
 
 // exports
 module.exports = router;
