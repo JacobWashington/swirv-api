@@ -110,4 +110,5 @@ module.exports = {
   update,
   destroy,
   createBranch,
+  findAll,
 };

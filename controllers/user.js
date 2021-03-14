@@ -18,9 +18,9 @@ const test = (req, res) => {
 
 // POST for adding the new user to the database
 const register = (req, res) => {
-    console.log(">>>>> Inside of /register");
-    console.log(">>>>> req.body");
-    console.log(req.body);
+  console.log(">>>>> Inside of /register");
+  console.log(">>>>> req.body");
+  console.log(req.body);
 
   db.User.findOne({ email: req.body.email })
     .then((user) => {
@@ -57,9 +57,9 @@ const register = (req, res) => {
 
 const show = (req, res) => {
   // Purpose: Fetch one user from DB and return
-  console.log("=====> Inside GET /user/:id");
-  console.log("=====> req.params");
-  console.log(req.params); // object used for finding user by id
+  // console.log("=====> Inside GET /user/:id");
+  // console.log("=====> req.params");
+  // console.log(req.params); // object used for finding user by id
   db.User.findById(req.params.id, (err, foundUser) => {
     if (err) console.log("Error in user#show:", err);
     res.json(foundUser);
@@ -73,7 +73,7 @@ const login = async (req, res) => {
   console.log(req.body);
 
   const foundUser = await db.User.findOne({ email: req.body.email });
-  
+
   if (foundUser) {
     // user is in the DB
     let isMatch = await bcrypt.compare(req.body.password, foundUser.password);
@@ -112,7 +112,6 @@ const login = async (req, res) => {
 
 // Profile
 const profile = (req, res) => {
-
   console.log(">>>>> inside /profile");
   console.log(req.body);
   console.log(">>>>> user");
@@ -120,8 +119,6 @@ const profile = (req, res) => {
   const { id, name, email } = req.user;
   res.json({ id: id, name, email });
 };
-
-
 
 // Upload profile pic
 const updateUser = async (req, res) => {

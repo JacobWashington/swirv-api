@@ -13,30 +13,19 @@ const PORT = process.env.PORT || 8000;
 // Middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-const corsOptions = {
-  origin: ["http:localhost:3000", `${DEPLOYED_REACT_URL}`],
-};
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(passport.initialize());
 
 // API Routes
-app.get("/swirv/", (req, res) => {
-  res.json({ message: "Welcome to Swirv" });
+app.get('/swirv/', (req, res) => {
+  res.json({message: "Welcome to Swirv"});
 });
-app.use("/swirv/users", routes.User);
-app.use(
-  "/swirv/comments",
-  passport.authenticate("jwt", { session: false }),
-  routes.Comment
-);
-app.use("/swirv/episodes", routes.Episode);
-app.use(
-  "/swirv/profiles",
-  passport.authenticate("jwt", { session: false }),
-  routes.Profile
-);
-app.use("/swirv/storylines", routes.Storyline);
-app.use("/swirv/theGreatAttractor", routes.TheGreatAttractor);
+app.use('/swirv/users', routes.User);
+app.use('/swirv/comments', passport.authenticate('jwt', { session: false }), routes.Comment);
+app.use('/swirv/episodes', routes.Episode);
+app.use('/swirv/profiles', passport.authenticate('jwt', { session: false }), routes.Profile);
+app.use('/swirv/storylines', routes.Storyline);
+app.use('/swirv/theGreatAttractor', routes.TheGreatAttractor);
 
 // Server
 const server = app.listen(PORT, () =>
