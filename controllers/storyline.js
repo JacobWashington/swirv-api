@@ -6,8 +6,7 @@ const index = (req, res) => {
 };
 
 const findAll = async (req, res) => {
-  console.log("*****************************************************************", req.user)
-  console.log(req.params._id); // object used for finding storyline by userId
+  console.log(req.params); // object used for finding storyline by userId
   const userStories = await db.Storyline.find({ authId: req.params._id });
   res.json(userStories);
 };
