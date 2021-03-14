@@ -22,10 +22,10 @@ app.get('/swirv/', (req, res) => {
 });
 app.use('/swirv/users', routes.User);
 app.use('/swirv/comments', passport.authenticate('jwt', { session: false }), routes.Comment);
-app.use('/swirv/episodes', passport.authenticate('jwt', { session: false }), routes.Episode);
+app.use('/swirv/episodes', routes.Episode);
 app.use('/swirv/profiles', passport.authenticate('jwt', { session: false }), routes.Profile);
 app.use('/swirv/storylines', routes.Storyline);
-app.use('/swirv/theGreatAttractor', passport.authenticate('jwt', { session: false }), routes.TheGreatAttractor);
+app.use('/swirv/theGreatAttractor', routes.TheGreatAttractor);
 
 // Server
 const server = app.listen(PORT, () =>

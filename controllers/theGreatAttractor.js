@@ -11,40 +11,39 @@ const { json } = require("express");
 
 const consumeStoryline = async (req, res) => {
 
+  console.log(req.body.storylineId)
   if (req.body.episodeId) {
     
     const update = { authId: "the_great_attractor" };
     const getEpisodeId = req.body.episodeId
-    // Get the syntax for searching for storylines that contains episodeId in storyline.episodes array
+
     const theId = mongoose.Types.ObjectId(getEpisodeId);
     
     // change selected storyline's authId to TGA
     await db.Storyline.updateOne({episodes: theId}, update);
     
     // pushing to TGA's storyline array
-    const TGA = await db.TheGreatAttractor.findOne({});
-    const selectedStoryline = await db.Storyline.find({
-      episodes: theId
-    });
-    TGA.storylines.push(selectedStoryline[0]._id);
-    await TGA.save();
-
+    // const TGA = await db.TheGreatAttractor.findOne({});
+    // const selectedStoryline = await db.Storyline.find({
+    //   episodes: theId
+    // });
+    // TGA.storylines.push(selectedStoryline[0]._id);
+    // await TGA.save();
   } else if (req.body.storylineId) {
+    console.log("TGA THIS >>>", req.body)
+    const update = { authId: "the_great_attractor", title: req.body.title  };
 
-    const update = { authId: "the_great_attractor" };
-    
-    // Changing all the authId in the episodes related to selected storylineId with TGA
-    // replacing for loop
-    const test = await db.Episode.updateMany({storyLineId: req.body.storylineId}, update, {unique: true});
+    const updateEps = await db.Episode.updateMany({storylineId: req.body.storylineId}, update, {unique: true});
+    const updateStoryline = await db.Storyline.updateOne({_id: req.body.storylineId}, update);
     
     // pushing to TGA's storyline array
-    const TGA = await db.TheGreatAttractor.findOne({});
-    const selectedStoryline = await db.Storyline.find({
-      _id: req.body.storylineId
-    });
-    TGA.storylines.push(selectedStoryline[0]._id);
-    await TGA.save();
-    res.json(TGA);
+    // const TGA = await db.TheGreatAttractor.findOne({});
+    // const selectedStoryline = await db.Storyline.find({
+    //   _id: req.body.storylineId
+    // });
+    // TGA.storylines.push(selectedStoryline[0]._id);
+    // await TGA.save();
+    // res.json(TGA);
   }
 };
 
@@ -58,9 +57,17 @@ const findEpisodes = async (req, res) => {
   res.json(allEp)
 };
 
+const destroy = async (req, res) => {
+  const allStorylines = await db.Storyline.deleteMany({authId: "the_great_attractor"})
+  const allEpisodes = await db.Episode.deleteMany({authId: "the_great_attractor"})
+
+  res.json("⚫️TGA's Storylines & Episodes deleted!⚫️")
+};
+
 
 module.exports = {
   consumeStoryline,
   show,
-  findEpisodes
+  findEpisodes,
+  destroy
 };

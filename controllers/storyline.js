@@ -5,10 +5,22 @@ const index = (req, res) => {
   res.json({ message: "Storyline endpoint OK! ✅" });
 };
 
+
 const findAll = async (req, res) => {
   console.log(req.params); // object used for finding storyline by userId
   const userStories = await db.Storyline.find({ authId: req.params._id });
-  res.json(userStories);
+
+const create = (req, res) => {
+  // Purpose: Create one storyline by adding body to DB, and return
+  console.log("=====> Inside POST /storyline");
+  console.log("=====> req.body");
+  console.log(req.body); // object used for creating new storyline
+  // const userId = req.body
+
+  db.Storyline.create(req.body, (err, savedStoryline) => {
+    if (err) console.log("Error in storyline#create:", err);
+    res.json(savedStoryline);
+  });
 };
 
 const show = (req, res) => {
@@ -23,20 +35,9 @@ const show = (req, res) => {
 };
 
 
-const create = (req, res) => {
-  // Purpose: Create one storyline by adding body to DB, and return
-  console.log("=====> Inside POST /storyline");
-  console.log("=====> req.body");
-  console.log(req.body); // object used for creating new storyline
-  // const userId = req.body
-  console.log(">>>>>USER<<<<<<", req.user);
-  db.Storyline.create(req.body, (err, savedStoryline) => {
-    if (err) console.log("Error in storyline#create:", err);
-    res.json(savedStoryline);
-  });
-};
 
 const createBranch = (req, res) => {
+  console.log("<<< IN createBranch >>>")
   if (req.body.storylineId && req.body.episodeId) {
     console.log(">>>>USER", req.user)
     console.log(">>>>BODY", req.body)
@@ -53,10 +54,11 @@ const createBranch = (req, res) => {
         res.json(savedBranch);
       });
   } else if (req.body.storylineId){
-    const { storylineId, title } = req.body
+    const { storylineId, title, __id } = req.body
+    console.log("CHECKING >>>", req.body)
       db.Storyline.create({
         branchedFromStorylineId: storylineId,
-        authId: req.user._id, 
+        authId: __id, 
         title: title
     }, (err, savedBranch) => {
         if (err) console.log("Error in storyline#create:", err);
@@ -103,6 +105,7 @@ module.exports = {
   create,
   update,
   destroy,
-  findAll,
-  createBranch
+  createBranch,
+  notLoggedInFind,
+  findUser
 };
