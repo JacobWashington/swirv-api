@@ -5,16 +5,10 @@ const index = (req, res) => {
   res.json({ message: "Storyline endpoint OK! ✅" });
 };
 
-const notLoggedInFind = async (req, res) => {
-  const allStories = await db.Storyline.find().sort({_id: -1});
-  res.json(allStories);
-}
 
-const findUser = async (req, res) => {
-  const userStories = await db.Storyline.find({ authId: req.body.authId });
-  console.log("REQ.BODY>>>>>>>",req.body)
-  res.json(userStories);
-};
+const findAll = async (req, res) => {
+  console.log(req.params); // object used for finding storyline by userId
+  const userStories = await db.Storyline.find({ authId: req.params._id });
 
 const create = (req, res) => {
   // Purpose: Create one storyline by adding body to DB, and return

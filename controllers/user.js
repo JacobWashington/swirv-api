@@ -55,6 +55,17 @@ const register = (req, res) => {
     .catch((err) => console.log("Error finding user", err));
 };
 
+const show = (req, res) => {
+  // Purpose: Fetch one user from DB and return
+  console.log("=====> Inside GET /user/:id");
+  console.log("=====> req.params");
+  console.log(req.params); // object used for finding user by id
+  db.User.findById(req.params.id, (err, foundUser) => {
+    if (err) console.log("Error in user#show:", err);
+    res.json(foundUser);
+  });
+};
+
 const login = async (req, res) => {
   // POST - finding a user and returning the user
   console.log(">>>>> Inside of /login");
@@ -137,4 +148,5 @@ module.exports = {
   login,
   profile,
   updateUser,
+  show,
 };
