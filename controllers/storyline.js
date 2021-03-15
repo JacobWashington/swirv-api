@@ -5,6 +5,11 @@ const index = (req, res) => {
   res.json({ message: "Storyline endpoint OK! ✅" });
 };
 
+const forAll = async (req, res) => {
+  const allStories = await db.Storyline.find().sort({created: -1});
+  res.json(allStories);
+};
+
 const findAll = async (req, res) => {
   console.log(req.params); // object used for finding storyline by userId
   const userStories = await db.Storyline.find({ authId: req.params._id });
@@ -111,4 +116,5 @@ module.exports = {
   destroy,
   createBranch,
   findAll,
+  forAll
 };

@@ -9,11 +9,11 @@ const configOptions = {
   useFindAndModify: false,
 };
 
-mongoose.connect(process.env.DATABASE_URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true
-});
+// mongoose.connect(process.env.DATABASE_URL, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+//   useCreateIndex: true
+// });
 
 mongoose
   .connect(MONGO_URL, configOptions)

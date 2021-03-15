@@ -3,6 +3,7 @@ const ctrl = require('../controllers');
 const passport = require('passport');
 
 //routes
+router.get("/forall", ctrl.Storyline.forAll);
 router.get("/all/:id", ctrl.Storyline.findAll);
 router.get('/index', ctrl.Storyline.index);
 router.post('/',ctrl.Storyline.create);
