@@ -1,13 +1,15 @@
 const db = require("../models");
 
 // Controller
-const index = (req, res) => {
-  res.json({ message: "Storyline endpoint OK! ✅" });
+const index = async (req, res) => {
+  const allStories = await db.Storyline.find().sort({created: -1}).limit(10);
+  res.json(allStories);
 };
 
 const findAll = async (req, res) => {
   console.log(req.params); // object used for finding storyline by userId
-  const userStories = await db.Storyline.find({ authId: req.params._id });
+  const userStories = await db.Storyline.find({ authId: req.params.id });
+  res.json(userStories)
 };
 
 const create = (req, res) => {
