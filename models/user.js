@@ -8,6 +8,7 @@ const userSchema = new Schema({
     date: {type: Date, default: Date.now()},
     avatar: {type: String, default:'https://res.cloudinary.com/y4050/image/upload/v1614149329/mjd9sb12ihdfwvmzqzes.png'},
     roles: {type: Array, default: 'Reader'},
+    bios: {type: String},
     favorites: {type: Array},
     readLater: {type: Array},
     following: {type: Array},
